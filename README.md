@@ -1,3 +1,11 @@
+To start mongoDB type the following command on your command terminal:
+
+mongosh 
+
+To see your Databases type:
+
+show dbs
+
 To create the LibraryDB type the following command:
 
 useLibraryDB
@@ -61,6 +69,36 @@ db.Authors.find({nationality:{$eq:"American"}})
 To find all books that are available and published after 1950 in my case type the following command:
 
 db.Books.find({available:true},{published_year:1950})
+
+To find all books that are available and published before 1950 in my case type the follwing command:
+
+db.Books.updateOne({ _id: 3 }, { $set: { available: false } })
+
+
+To add a genre book with _Id: 8 using $addToSet use the following command:
+db.Books.updateOne({ _id: 8 }, { $addToSet: { genres: "Fantasy" } })
+
+
+To a borrowed book to patron's record with _id: 5 type the following command:
+db.Patrons.updateOne({ _id: 5 }, { $addToSet: { borrowed_books: 2 } })
+
+
+To remove a book where title: "Brave New World" type the following command:
+db.Books.deleteOne({ title: "Brave New World" })
+
+
+To remove author with_id: 3 type the following command:
+db.Authors.deleteOne({ _id: 3 })
+
+To retrieve books type the following command:
+db.Books.find({ published_year: { $gt: 1950 } })
+
+
+To retrieve authors with nationality type the following command:
+db.Authors.find({ nationality: { $eq: "American" } })
+
+To use $set to mark all books as available true type the following command:
+db.Books.updateMany({}, { $set: { available: true } })
 
 
 To find all authors named George in my case type the following command:
